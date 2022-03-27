@@ -1,3 +1,4 @@
+import * as TWEEN from '@tweenjs/tween.js'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
@@ -14,7 +15,7 @@ const controls = new OrbitControls(camera, renderer.domElement)
 
 const geometry = new THREE.BoxGeometry()
 const material = new THREE.MeshBasicMaterial({
-    color: 0x00ff00,
+    color: 0x00ffd0,
     wireframe: true,
 })
 
@@ -29,12 +30,35 @@ function onWindowResize() {
     render()
 }
 
+const cubeScale = { x: 1, y: 1, z: 1 };
+const updateCubeScale = () => {
+    cube.scale.set(cubeScale.x, cubeScale.y, cubeScale.z)
+};
+const cubeTween = new TWEEN.Tween(cubeScale)
+    .to({ x: 0.1, y: 0.1, z: 0.1 })
+    .delay(100)
+    .easing(TWEEN.Easing.Quadratic.In)
+    .onUpdate(updateCubeScale)
+const cubeTweenBack = new TWEEN.Tween(cubeScale)    
+    .to({ x: 1, y: 1, z: 1 })
+    .delay(100)
+    .easing(TWEEN.Easing.Bounce.Out)
+    .onUpdate(updateCubeScale);
+
+const cubeTweenChain = cubeTween.chain(cubeTweenBack);
+cubeTweenBack.chain(cubeTween);
+
+cubeTweenChain.start();
+
+
 function animate() {
     requestAnimationFrame(animate)
 
+    TWEEN.update();
     cube.rotation.x += 0.01
     cube.rotation.y += 0.01
 
+    
     controls.update()
 
     render()
