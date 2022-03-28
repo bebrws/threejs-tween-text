@@ -1,3 +1,23 @@
+# ThreeJS Text example
+https://threejs.org/examples/#webgl_geometry_text
+https://github.com/mrdoob/three.js/blob/master/examples/webgl_geometry_text.html
+
+# Metling vertices
+https://www.creativebloq.com/how-to/how-to-melt-a-3d-object-with-threejs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Three.js TypeScript Boilerplate
 
 This boilerplate is supplementary to my book titled **Three.js and TypeScript** (ASIN : B09GYTKRCH)
